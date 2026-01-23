@@ -36,7 +36,7 @@ export default function HomePage() {
         </Link>
 
         <a
-          href="https://github.com"
+          href="https://github.com/LandimTiago"
           target="_blank"
           className="
             px-6 py-3 rounded

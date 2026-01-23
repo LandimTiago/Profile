@@ -9,7 +9,6 @@ interface PageProps {
 
 export function generateStaticParams() {
   const projects = getAllProjects();
-
   return projects.map((project) => ({ id: project.slug }));
 }
 

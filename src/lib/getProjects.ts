@@ -39,6 +39,9 @@ export function getProjectBySlug(slug:string): Project | null {
   }
 
   const fullPath = path.join(projectsDirectory, `${slug}.mdx`);
+
+  if (!fs.existsSync(fullPath)) return null
+
   const fileContent = fs.readFileSync(fullPath, 'utf8');
 
   const {data, content} = matter(fileContent)

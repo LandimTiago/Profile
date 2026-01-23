@@ -1,9 +1,10 @@
 import { getAllProjects, getProjectBySlug } from "@/lib/getProjects";
+import { notFound } from "next/navigation";
 
 interface PageProps {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
+  };
 }
 
 export function generateStaticParams() {
@@ -17,7 +18,7 @@ export default async function ProjectPage({ params }: PageProps) {
   const project = getProjectBySlug(id);
 
   if (!project) {
-    return <h1>Projeto não encontrado</h1>;
+    notFound(); // importante
   }
 
   return (

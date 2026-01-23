@@ -14,3 +14,7 @@
   --color-magenta: #db2777;
   --color-magenta-hover: #be185d;
 }
+
+html {
+  scrollbar-gutter: stable;
+}

@@ -14,7 +14,7 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
-        <div className="max-w-2xl">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
           <p className="text-magenta text-sm font-semibold tracking-wide mb-3">
             SOFTWARE ENGINEER · BACKEND · GO
           </p>

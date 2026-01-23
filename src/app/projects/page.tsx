@@ -1,27 +1,40 @@
-import { getAllProjects } from '@/lib/getProjects';
+import { getAllProjects } from "@/lib/getProjects";
 import Link from "next/link";
-import React from 'react';
 
-const ProjectsPage: React.FC = () => {
-
-  const projects = getAllProjects()
+export default function ProjectsPage() {
+  const projects = getAllProjects();
 
   return (
-    <div>
-      <h1>Projetos</h1>
+    <section className="flex flex-col gap-10">
+      <header>
+        <h1 className="text-3xl font-bold">Projetos</h1>
+        <p className="mt-2 text-[var(--color-text-secondary)]">
+          Alguns projetos selecionados e experiências relevantes.
+        </p>
+      </header>
 
-      <ul>
+      <div className="grid gap-6">
         {projects.map((project) => (
-          <li key={project.slug}>
-            <Link href={`/projects/${project.slug}`}>
-              <strong>{project.title}</strong>
-            </Link>
-            <p>{project.description}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+          <Link
+            key={project.slug}
+            href={`/projects/${project.slug}`}
+            className="
+              block rounded
+              border border-[var(--color-border)]
+              p-6
+              hover:border-[var(--color-text-primary)]
+            "
+          >
+            <h2 className="text-xl font-semibold">
+              {project.title}
+            </h2>
 
-export default ProjectsPage;
+            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+              {project.description}
+            </p>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}

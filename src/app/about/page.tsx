@@ -1,10 +1,47 @@
 import Link from "next/link";
 
 const skills = [
-  { label: "Backend", items: ["Golang", "Node.js", "TypeScript", "APIs", "WebSockets"] },
-  { label: "Frontend", items: ["React", "Next.js", "React Native", "UI/Design Systems"] },
-  { label: "Arquitetura", items: ["Clean Architecture", "SOLID", "Microsserviços", "Event-driven"] },
-  { label: "Dados & Infra", items: ["PostgreSQL", "Redis", "Observabilidade", "Deploy e ambientes"] },
+  {
+    label: "Backend",
+    items: [
+      "Golang",
+      "Node.js",
+      "TypeScript",
+      "APIs REST",
+      "WebSockets",
+      "Alta concorrência",
+    ],
+  },
+  {
+    label: "Frontend",
+    items: [
+      "React",
+      "Next.js",
+      "React Native",
+      "Design Systems",
+      "Interfaces performáticas",
+    ],
+  },
+  {
+    label: "Arquitetura",
+    items: [
+      "Clean Architecture",
+      "SOLID",
+      "Microsserviços",
+      "Event-driven",
+      "BFF",
+    ],
+  },
+  {
+    label: "Dados & Infra",
+    items: [
+      "PostgreSQL",
+      "Redis",
+      "Mensageria",
+      "Observabilidade",
+      "Ambientes produtivos",
+    ],
+  },
 ];
 
 const principles = [
@@ -69,10 +106,10 @@ export default function AboutPage() {
           </h1>
 
           <p className="text-[var(--color-text-secondary)] max-w-3xl">
-            Sou engenheiro de software com foco em construir sistemas robustos,
-            escaláveis e orientados a resultado. Minha base é backend e arquitetura,
-            mas também entrego soluções completas do backend ao frontend quando isso
-            aumenta velocidade e qualidade do produto.
+            Sou engenheiro de software com foco em backend e arquitetura, atuando na
+            construção de sistemas robustos, escaláveis e orientados a resultado.
+            Trabalho do backend ao frontend quando isso acelera entregas, reduz riscos
+            e melhora a qualidade do produto final.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">

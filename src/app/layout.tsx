@@ -18,7 +18,7 @@ export default function RootLayout({
         <Header />
 
         {/* Full width */}
-        <main className="w-full px-4 sm:px-6 lg:px-10 py-10">
+        <main className="w-full py-10">
           {children}
         </main>
       </body>

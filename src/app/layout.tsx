@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import "./globals.css";
 
 export default function RootLayout({
@@ -14,9 +15,11 @@ export default function RootLayout({
           text-[var(--color-text-primary)]
         "
       >
-        <div className="mx-auto max-w-5xl px-6 py-12">
+        <Header />
+
+        <main className="mx-auto max-w-5xl px-6 py-12">
           {children}
-        </div>
+        </main>
       </body>
     </html>
   );

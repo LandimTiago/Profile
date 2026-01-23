@@ -14,6 +14,10 @@ export type Project = {
   stack?: string[];
   highlights?: string[];
   content?: string;
+  links?: {
+    repo?: string;
+    demo?: string;
+  };
 };
 
 export function getAllProjects(): Project[] {
@@ -35,6 +39,7 @@ export function getAllProjects(): Project[] {
       context: data.context,
       stack: data.stack ?? [],
       highlights: data.highlights ?? [],
+      links: data.links ?? {},
     };
   });
 }
@@ -62,5 +67,6 @@ export function getProjectBySlug(slug: string): Project | null {
     context: data.context,
     stack: data.stack ?? [],
     highlights: data.highlights ?? [],
+    links: data.links ?? {},
   };
 }

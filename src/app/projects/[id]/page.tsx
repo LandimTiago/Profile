@@ -1,9 +1,28 @@
 import { getAllProjects, getProjectBySlug } from "@/lib/getProjects";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 interface PageProps {
   params: {
     id: string;
+  };
+}
+
+export function generateMetadata({ params }: PageProps): Metadata {
+  const project = getProjectBySlug(params.id);
+
+  if (!project) {
+    return {};
+  }
+
+  return {
+    title: project.title,
+    description: project.description,
+    openGraph: {
+      title: project.title,
+      description: project.description,
+      type: "article",
+    },
   };
 }
 

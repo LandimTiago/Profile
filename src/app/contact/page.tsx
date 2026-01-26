@@ -1,3 +1,11 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contato",
+  description:
+    "Entre em contato para discutir projetos, sistemas ou desafios técnicos.",
+};
+
 export default function ContactPage() {
   return (
     <section className="w-full">

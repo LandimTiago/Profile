@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Link from "next/link";
 
 const skills = [
@@ -95,21 +96,25 @@ const timeline = [
   },
 ];
 
+export const metadata: Metadata = {
+  title: "Sobre mim",
+  description:
+    "Conheça minha trajetória como engenheiro de software, minha experiência profissional e princípios de engenharia.",
+};
+
 export default function AboutPage() {
   return (
     <section className="w-full">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 flex flex-col gap-16">
         {/* Abertura */}
         <header className="flex flex-col gap-4">
-          <h1 className="text-3xl sm:text-4xl font-bold">
-            Sobre mim
-          </h1>
+          <h1 className="text-3xl sm:text-4xl font-bold">Sobre mim</h1>
 
           <p className="text-[var(--color-text-secondary)] max-w-3xl">
-            Sou engenheiro de software com foco em backend e arquitetura, atuando na
-            construção de sistemas robustos, escaláveis e orientados a resultado.
-            Trabalho do backend ao frontend quando isso acelera entregas, reduz riscos
-            e melhora a qualidade do produto final.
+            Sou engenheiro de software com foco em backend e arquitetura,
+            atuando na construção de sistemas robustos, escaláveis e orientados
+            a resultado. Trabalho do backend ao frontend quando isso acelera
+            entregas, reduz riscos e melhora a qualidade do produto final.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
@@ -150,11 +155,15 @@ export default function AboutPage() {
             p-6
           "
         >
-          <h2 className="text-xl font-semibold">O que você pode esperar de mim</h2>
+          <h2 className="text-xl font-semibold">
+            O que você pode esperar de mim
+          </h2>
           <ul className="mt-4 grid gap-3 text-sm sm:text-base text-[var(--color-text-secondary)]">
             <li>• Entrega previsível e focada no que move o produto</li>
             <li>• Arquitetura sustentável para evoluir sem retrabalho</li>
-            <li>• Performance, concorrência e confiabilidade como prioridade</li>
+            <li>
+              • Performance, concorrência e confiabilidade como prioridade
+            </li>
             <li>• Visão de produto: engenharia a serviço de resultado</li>
           </ul>
         </section>
@@ -254,8 +263,8 @@ export default function AboutPage() {
         >
           <h2 className="text-xl font-semibold">Vamos conversar?</h2>
           <p className="mt-2 text-sm sm:text-base text-[var(--color-text-secondary)]">
-            Se você está construindo algo que precisa de engenharia sólida e entrega
-            com responsabilidade, me chama.
+            Se você está construindo algo que precisa de engenharia sólida e
+            entrega com responsabilidade, me chama.
           </p>
 
           <div className="mt-4">

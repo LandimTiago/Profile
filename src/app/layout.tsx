@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     images: [
       {
-        url: `${siteUrl}/og.png`,
+        url: `${siteUrl}og.png`,
         width: 1200,
         height: 630,
         alt: `${siteName} — Software Engineer`,
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     title: `${siteName} | Software Engineer`,
     description:
       "Engenharia de software para sistemas que não podem falhar. Backend, frontend e arquitetura.",
-    images: [`${siteUrl}/og.png`],
+    images: [`${siteUrl}og.png`],
   },
 };
 

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description:
     "Engenheiro de software focado em sistemas robustos, escaláveis e orientados a resultado. Backend, frontend e arquitetura.",
   alternates: {
-    canonical: siteUrl,
+    canonical: "/",
   },
   keywords: [
     "Software Engineer",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     images: [
       {
-        url: "/og.png",
+        url: `${siteUrl}/og.png`,
         width: 1200,
         height: 630,
         alt: `${siteName} — Software Engineer`,
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     title: `${siteName} | Software Engineer`,
     description:
       "Engenharia de software para sistemas que não podem falhar. Backend, frontend e arquitetura.",
-    images: ["/og.png"],
+    images: [`${siteUrl}/og.png`],
   },
 };
 

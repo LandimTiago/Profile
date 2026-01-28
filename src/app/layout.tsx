@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import { Metadata } from "next";
 import "./globals.css";
 
-const siteUrl = "https://seusite.com"; // TROCAR
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const siteName = "Tiago Landim";
 
 export const metadata: Metadata = {
@@ -89,14 +89,14 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "Tiago Landim",
-              url: "https://seusite.com", // trocar
+              url: siteUrl,
               description:
                 "Engenheiro de software focado em sistemas robustos, escaláveis e orientados a resultado.",
               author: {
                 "@type": "Person",
                 name: "Tiago Landim",
                 jobTitle: "Software Engineer",
-                url: "https://seusite.com",
+                url: siteUrl,
                 sameAs: [
                   "https://www.linkedin.com/in/landim-tiago",
                   "https://github.com/LandimTiago",

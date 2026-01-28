@@ -8,6 +8,8 @@ interface PageProps {
   };
 }
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -68,7 +70,7 @@ export default async function ProjectPage({ params }: PageProps) {
               author: { "@type": "Person", name: "Tiago Landim" },
               mainEntityOfPage: {
                 "@type": "WebPage",
-                "@id": `https://seusite.com/projects/${project.slug}`,
+                "@id": `${siteUrl}/projects/${project.slug}`,
               },
             }),
           }}

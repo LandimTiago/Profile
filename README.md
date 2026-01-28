@@ -1,270 +1,119 @@
-# Architecture Decisions — Portfolio Project
+# Portfolio — Tiago Landim
 
-Este documento registra as **decisões de arquitetura, tecnologia e estilo**
-adotadas no projeto de portfólio, com o objetivo de garantir previsibilidade,
-baixo custo, simplicidade operacional e fácil evolução futura.
+Landing page institucional e portfólio profissional, desenvolvida com foco em **performance, SEO técnico, segurança e escalabilidade futura**, utilizando **Next.js em modo SSG (Static Site Generation)**.
 
----
-
-## 1. Objetivo do Projeto
-
-Criar um **site de portfólio profissional** com:
-
-* Página inicial (Home)
-* Página Sobre
-* Página de Projetos (listagem)
-* Página de Detalhe de Projeto
-* Página de Contato
-
-Características principais:
-
-* Conteúdo majoritariamente estático
-* SEO adequado
-* Baixo custo de manutenção
-* Estrutura clara para possível evolução futura
-  (ex: página de vendas de cursos)
+O projeto foi pensado para ser simples na superfície, mas sólido na base — seguindo boas práticas de arquitetura, SEO e infraestrutura moderna.
 
 ---
 
-## 2. Decisão Arquitetural Principal: SSG Puro
+## ✨ Objetivo
 
-### Escolha
-
-O projeto foi definido como **100% estático**, utilizando **Static Site Generation (SSG)**.
-
-### Implementação
-
-* Framework: **Next.js (App Router)**
-* Configuração explícita:
-
-  ```ts
-  output: "export"
-  ```
-* Todo o HTML é gerado **no build**
-* Nenhum código é executado em runtime no servidor
-
-### Consequências Aceitas
-
-* Não existe SSR
-* Não existe fallback dinâmico
-* Todas as rotas precisam ser conhecidas no build
-* URLs inválidas não são suportadas (contrato do sistema)
-
-### Justificativa
-
-* Custo de hosting praticamente zero
-* Performance máxima (HTML estático)
-* Zero complexidade operacional
-* Ideal para portfólio e conteúdo institucional
+- Apresentar meu perfil profissional de forma clara e estratégica
+- Consolidar experiências, projetos e atuação técnica
+- Servir como base para expansão futura (ex: produtos, cursos, conteúdos)
+- Manter **custo zero ou mínimo de infraestrutura**, sem abrir mão de qualidade
 
 ---
 
-## 3. Roteamento Dinâmico em SSG
+## 🧱 Stack Técnica
 
-### Regra
-
-Rotas dinâmicas (`/projects/[id]`) **só existem se forem geradas no build**.
-
-### Implementação
-
-* Uso obrigatório de `generateStaticParams`
-* Slugs vêm exclusivamente do filesystem (MDX)
-
-Exemplo conceitual:
-
-```ts
-export function generateStaticParams() {
-  return projects.map(project => ({
-    id: project.slug,
-  }));
-}
-```
-
-### Importante
-
-* Rotas fora dessa lista **não existem**
-* Não há fallback
-* Não há SSR
-* Isso é uma decisão arquitetural, não limitação acidental
+- **Next.js (App Router)**
+- **SSG (Static Site Generation)**
+- **TypeScript**
+- **Tailwind CSS**
+- **MDX** para conteúdo de projetos
+- **Vercel** (deploy e hosting)
+- **Cloudflare** (DNS, SSL, segurança)
+- **SEO técnico avançado**
 
 ---
 
-## 4. Fonte de Conteúdo (Projetos)
+## ⚙️ Arquitetura
 
-### Formato
+### Static First (SSG)
 
-* **MDX**
-* Um arquivo por projeto
+- Todas as páginas são pré-geradas no build
+- Rotas dinâmicas (`/projects/[id]`) utilizam `generateStaticParams`
+- Zero SSR em produção
+- Ideal para:
+  - performance
+  - SEO
+  - custo
+  - previsibilidade
 
-Estrutura:
+### Conteúdo
 
-```
-src/content/projects/
-  ├─ primeiro-projeto.mdx
-  ├─ segundo-projeto.mdx
-```
-
-### Motivos da escolha
-
-* Separação clara entre conteúdo e layout
-* Melhor SEO
-* Fácil evolução para cases, blog ou páginas de venda
-* Conteúdo versionado no Git
+- Projetos e experiências descritos via **MDX**
+- Conteúdo versionado junto ao código
+- Estrutura pensada para futura troca de fonte (ex: API, GitHub, CMS headless) **sem quebrar o SSG**
 
 ---
 
-## 5. Leitura de Conteúdo (Build Time)
+## 🎨 UI / Estilo
 
-* Leitura feita via `fs`
-* Parsing de frontmatter com `gray-matter`
-* Executado **somente no build**
-
-Exemplo de responsabilidades da camada de leitura:
-
-* Listar projetos
-* Resolver slug → arquivo
-* Extrair metadados e conteúdo
-
-Nunca:
-
-* Fetch em runtime
-* Banco de dados
-* API routes
+- Tema **dark (Darcula-inspired)**
+- Paleta focada em:
+  - preto
+  - roxo
+  - magenta
+- Layout **full-width**, preparado para:
+  - monitores ultrawide
+  - mobile-first
+- Hero com imagem em alta resolução (3440px / 5120px)
 
 ---
 
-## 6. Estilo e Design System
+## 🔍 SEO & Performance
 
-### Tema
+Implementações:
 
-* Dark / Developer / Darcula-inspired
+- Metadata global e por página
+- Open Graph completo (OG image, title, description)
+- Twitter Cards
+- Canonical URLs
+- `sitemap.xml`
+- `robots.txt`
+- Schema.org (`WebSite` + `Person`)
+- Headers de segurança
+- Build 100% estático
 
-### Decisão Importante
+Validação:
 
-O projeto utiliza **Tailwind CSS v4**, que:
-
-* Não define tema via `tailwind.config.ts`
-* Centraliza design tokens no CSS via `@theme`
-
-### Tokens Globais
-
-Definidos em:
-
-```
-src/app/globals.css
-```
-
-Exemplo conceitual:
-
-```css
-@theme {
-  --color-background: #0202ce;
-  --color-text-primary: #e6e6eb;
-  --color-border: #1f1f2e;
-}
-```
-
-### Uso
-
-As cores são aplicadas via:
-
-```tsx
-bg-[var(--color-background)]
-text-[var(--color-text-primary)]
-```
-
-### Motivo
-
-* Maior controle explícito
-* Facilita evolução para design system
-* Alinhado com a filosofia do Tailwind v4
+- Lighthouse
+- OpenGraph Debug
+- Build output auditável
 
 ---
 
-## 7. Layout Global
+## 🔐 Segurança
 
-### Estrutura
+Headers aplicados:
 
-* Header global
-* Conteúdo centralizado
-* Fundo aplicado no `<body>`
-* Sem CSS inline
+- Content Security Policy (CSP)
+- HSTS
+- X-Frame-Options
+- X-Content-Type-Options
+- Referrer-Policy
+- Permissions-Policy
 
-### Decisão de UX Importante
+Superfície de ataque mínima:
 
-Para evitar “pulo” lateral ao aparecer scrollbar:
-
-```css
-html {
-  scrollbar-gutter: stable;
-}
-```
-
-Isso garante consistência visual entre páginas com e sem scroll.
+- Sem backend
+- Sem formulários
+- Sem exposição de secrets
+- Apenas variável pública de URL do site
 
 ---
 
-## 8. Header e Navegação
+## 🌐 Infraestrutura
 
-* Header fixo no topo
-* Navegação estática:
-
-  * Home
-  * Sobre
-  * Projetos
-  * Contato
-* Nenhum estado dinâmico
-* Nenhum menu mobile por enquanto
-
-Motivo:
-
-* Simplicidade
-* Clareza
-* Evolução posterior sem refactor
+- **Vercel**
+  - Static Export (`output: export`)
+  - CDN global
+  - HTTPS automático
+- **Cloudflare**
+  - DNS
+  - SSL/TLS (Full)
+  - Preparado para cache e proteção futura
 
 ---
-
-## 9. Tratamento de Rotas Inválidas
-
-### Decisão
-
-Como o site é estático:
-
-* Rotas inválidas **não são suportadas**
-* O usuário não deve chegar a URLs inexistentes via navegação
-
-### Implementação
-
-* Slugs vêm apenas do build
-* `notFound()` é usado apenas como segurança
-* Não existe fallback dinâmico
-
----
-
-## 10. Evolução Futura (Planejada, Não Implementada)
-
-Este projeto pode evoluir para:
-
-* Página de vendas de cursos
-* Conteúdo mais editorial
-* Integração com plataformas externas
-
-Quando isso acontecer:
-
-* A decisão sobre SSR / ISR será reavaliada
-* O core estático pode ser mantido
-* Nada do que foi feito aqui impede essa evolução
-
----
-
-## 11. Princípios Guias
-
-* Simplicidade > Hype
-* Previsibilidade > Flexibilidade excessiva
-* Build-time > Runtime
-* Custo baixo como default
-* Decisões explícitas > comportamento implícito
-
----
-
-**Este documento deve ser atualizado sempre que uma decisão estrutural relevante for alterada.**

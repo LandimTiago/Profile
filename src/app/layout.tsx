@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import { Metadata } from "next";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000/";
 const siteName = "Tiago Landim";
 
 export const metadata: Metadata = {

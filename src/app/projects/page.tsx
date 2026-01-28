@@ -5,7 +5,9 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Projetos e estudos de caso",
   description:
-    "Estudos de caso reais envolvendo sistemas críticos, alta concorrência e soluções completas do backend ao frontend.",
+    "Estudos de caso envolvendo sistemas críticos, alta concorrência e soluções completas do backend ao frontend.",
+  alternates: { canonical: "/projects" },
+  openGraph: { url: "/projects" },
 };
 
 export default function ProjectsPage() {

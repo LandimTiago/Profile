@@ -8,20 +8,33 @@ interface PageProps {
   };
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const project = getProjectBySlug(params.id);
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const project = getProjectBySlug(id);
 
-  if (!project) {
-    return {};
-  }
+  if (!project) return {};
+  const canonical = `/projects/${project.slug}`;
 
   return {
     title: project.title,
     description: project.description,
+    alternates: { canonical },
     openGraph: {
+      type: "article",
+      url: canonical,
       title: project.title,
       description: project.description,
-      type: "article",
+      images: [
+        { url: "/og.png", width: 1200, height: 630, alt: project.title },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.description,
+      images: ["/og.png"],
     },
   };
 }
@@ -42,6 +55,25 @@ export default async function ProjectPage({ params }: PageProps) {
   return (
     <section className="w-full">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline: project.title,
+              description: project.description,
+              datePublished: project.date,
+              author: { "@type": "Person", name: "Tiago Landim" },
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": `https://seusite.com/projects/${project.slug}`,
+              },
+            }),
+          }}
+        />
+
         {/* Case header */}
         <header className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">

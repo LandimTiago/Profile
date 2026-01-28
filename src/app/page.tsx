@@ -8,9 +8,10 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Software Engineer focado em sistemas críticos",
   description:
-    "Construo sistemas robustos, escaláveis e orientados a resultado. Experiência com backend, frontend e arquitetura.",
+    "Construo sistemas robustos, escaláveis e orientados a resultado. Backend, frontend e arquitetura.",
+  alternates: { canonical: "/" },
+  openGraph: { url: "/" },
 };
-
 export default function HomePage() {
   return (
     <div className="flex flex-col gap-20">

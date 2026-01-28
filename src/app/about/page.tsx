@@ -99,7 +99,9 @@ const timeline = [
 export const metadata: Metadata = {
   title: "Sobre mim",
   description:
-    "Conheça minha trajetória como engenheiro de software, minha experiência profissional e princípios de engenharia.",
+    "Trajetória, experiência e princípios de engenharia para construir software sustentável.",
+  alternates: { canonical: "/about" },
+  openGraph: { url: "/about" },
 };
 
 export default function AboutPage() {

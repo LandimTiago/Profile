@@ -2,8 +2,9 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contato",
-  description:
-    "Entre em contato para discutir projetos, sistemas ou desafios técnicos.",
+  description: "Canal direto para contato profissional e propostas.",
+  alternates: { canonical: "/contact" },
+  openGraph: { url: "/contact" },
 };
 
 export default function ContactPage() {
